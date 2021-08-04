@@ -1,14 +1,12 @@
 package com.example.stegnoapp.stegno.CryptoTask;
 
-import android.app.Activity;
-import android.app.ProgressDialog;
 import android.graphics.Bitmap;
 import android.os.AsyncTask;
 import android.util.Log;
 
 import com.example.stegnoapp.stegno.CallBacks.CryptCallback;
 import com.example.stegnoapp.stegno.Tools.Utils;
-import com.example.stegnoapp.ui.gallery.GalleryFragment;
+import com.example.stegnoapp.ui.encrypt.Encrypt;
 
 import java.util.List;
 
@@ -27,7 +25,7 @@ public class Encoding extends AsyncTask<ImageStegno, Integer, ImageStegno> {
     private int maximumProgress;
     // private final ProgressDialog progressDialog;
 
-    public Encoding(GalleryFragment activity, CryptCallback callbackInterface) {
+    public Encoding(Encrypt activity, CryptCallback callbackInterface) {
         super();
         // this.progressDialog = new ProgressDialog(activity);
         this.callbackInterface = callbackInterface;

@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.gallery.GalleryFragment" >
+    tools:context=".ui.decrypt.Decrypt" >
 
     <TextView
         android:id="@+id/text_gallery"
@@ -27,11 +27,10 @@
         android:id="@+id/selectButton"
         android:layout_width="wrap_content"
         android:layout_height="48dp"
-        android:layout_marginStart="36dp"
-        android:layout_marginBottom="88dp"
+        android:layout_marginStart="28dp"
+        android:layout_marginBottom="112dp"
         android:text="Select Image"
         app:layout_constraintBottom_toTopOf="@+id/text_gallery"
-        app:layout_constraintHorizontal_bias="0.468"
         app:layout_constraintStart_toStartOf="parent" />
 
     <ImageView
@@ -48,64 +47,30 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0" />
 
+
     <Button
-        android:id="@+id/encryptButton"
+        android:id="@+id/decryptButton"
         android:layout_width="110dp"
         android:layout_height="48dp"
-        android:layout_marginEnd="44dp"
-        android:layout_marginBottom="88dp"
-        android:text="Encrypt"
+        android:layout_marginEnd="68dp"
+        android:layout_marginBottom="112dp"
+        android:text="Decrypt"
         app:layout_constraintBottom_toTopOf="@+id/text_gallery"
         app:layout_constraintEnd_toEndOf="parent" />
-
-    <EditText
-        android:id="@+id/message"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:ems="10"
-        android:hint="Message to encrypt"
-        android:inputType="textPersonName"
-        android:minHeight="48dp"
-        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageSelect"
-        tools:ignore="MissingConstraints" />
 
     <EditText
         android:id="@+id/key"
         android:layout_width="153dp"
         android:layout_height="48dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginBottom="188dp"
         android:ems="10"
         android:hint="Secret Key"
         android:inputType="textPersonName"
         app:layout_constraintBottom_toTopOf="@+id/text_gallery"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/message"
-        app:layout_constraintVertical_bias="0.005" />
+        app:layout_constraintTop_toBottomOf="@+id/imageSelect"
+        app:layout_constraintVertical_bias="0.82" />
 
-    <Button
-        android:id="@+id/saveButton"
-        android:layout_width="wrap_content"
-        android:layout_height="48dp"
-        android:layout_marginBottom="28dp"
-        android:text="Save Image"
-        app:layout_constraintBottom_toTopOf="@+id/text_gallery"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent" />
 
-    <ProgressBar
-        android:id="@+id/progressBar"
-        style="?android:attr/progressBarStyleHorizontal"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        app:layout_constraintBottom_toTopOf="@+id/selectButton"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/key" />
 </androidx.constraintlayout.widget.ConstraintLayout>

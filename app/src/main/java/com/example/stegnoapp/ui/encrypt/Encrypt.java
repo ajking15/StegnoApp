@@ -1,17 +1,13 @@
-package com.example.stegnoapp.ui.gallery;
+package com.example.stegnoapp.ui.encrypt;
 
 import android.Manifest;
-import android.app.Activity;
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.net.Uri;
-import android.nfc.Tag;
 import android.os.Bundle;
 import android.os.Environment;
-import android.preference.PreferenceManager;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -28,7 +24,7 @@ import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
-import com.example.stegnoapp.R;
+
 import com.example.stegnoapp.databinding.FragmentGalleryBinding;
 import com.example.stegnoapp.stegno.CallBacks.CryptCallback;
 import com.example.stegnoapp.stegno.CryptoTask.Encoding;
@@ -40,9 +36,9 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 
-public class GalleryFragment extends Fragment implements CryptCallback {
+public class Encrypt extends Fragment implements CryptCallback {
 
-    private GalleryViewModel galleryViewModel;
+    private EncryptModel galleryViewModel;
     private FragmentGalleryBinding binding;
     private static final String Tag = "Encoding fragment";
     ImageView imgSelect;
@@ -69,7 +65,7 @@ public class GalleryFragment extends Fragment implements CryptCallback {
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         galleryViewModel =
-                new ViewModelProvider(this).get(GalleryViewModel.class);
+                new ViewModelProvider(this).get(EncryptModel.class);
 
 
         binding = FragmentGalleryBinding.inflate(inflater, container, false);
@@ -130,7 +126,7 @@ public class GalleryFragment extends Fragment implements CryptCallback {
             //New Image Stegnography Obj
             imageStegno = new ImageStegno(message.getText().toString(), key.getText().toString(), originalImage);
             //Encoding Text to image
-            encoding = new Encoding(GalleryFragment.this, GalleryFragment.this);
+            encoding = new Encoding(Encrypt.this, Encrypt.this);
             encoding.execute(imageStegno);
         }
     }
@@ -204,6 +200,8 @@ public class GalleryFragment extends Fragment implements CryptCallback {
             encodedImage = result.getEncodedImage();
             textView.setText("Image Encoded!");
             imgSelect.setImageBitmap(encodedImage);
+            Log.d(Tag, "Message: " + message.getText().toString());
+            Log.d(Tag, "Key: " + key.getText().toString());
         }
     }
 }

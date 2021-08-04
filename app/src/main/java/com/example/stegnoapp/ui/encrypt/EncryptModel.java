@@ -1,14 +1,14 @@
-package com.example.stegnoapp.ui.gallery;
+package com.example.stegnoapp.ui.encrypt;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-public class GalleryViewModel extends ViewModel {
+public class EncryptModel extends ViewModel {
 
     private MutableLiveData<String> mText;
 
-    public GalleryViewModel() {
+    public EncryptModel() {
         mText = new MutableLiveData<>();
         mText.setValue("This is gallery fragment");
     }
