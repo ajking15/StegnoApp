@@ -25,7 +25,7 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
-import com.example.stegnoapp.databinding.FragmentGalleryBinding;
+import com.example.stegnoapp.databinding.EncryptBinding;
 import com.example.stegnoapp.stegno.CallBacks.CryptCallback;
 import com.example.stegnoapp.stegno.CryptoTask.Encoding;
 import com.example.stegnoapp.stegno.CryptoTask.ImageStegno;
@@ -39,7 +39,7 @@ import java.io.OutputStream;
 public class Encrypt extends Fragment implements CryptCallback {
 
     private EncryptModel galleryViewModel;
-    private FragmentGalleryBinding binding;
+    private EncryptBinding binding;
     private static final String Tag = "Encoding fragment";
     ImageView imgSelect;
     TextView textView;
@@ -68,7 +68,7 @@ public class Encrypt extends Fragment implements CryptCallback {
                 new ViewModelProvider(this).get(EncryptModel.class);
 
 
-        binding = FragmentGalleryBinding.inflate(inflater, container, false);
+        binding = EncryptBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
         textView = binding.textGallery;

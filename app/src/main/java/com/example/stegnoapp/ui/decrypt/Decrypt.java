@@ -19,7 +19,7 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import com.example.stegnoapp.R;
-import com.example.stegnoapp.databinding.FragmentSlideshowBinding;
+import com.example.stegnoapp.databinding.DecryptBinding;
 import com.example.stegnoapp.stegno.CallBacks.CryptCallback;
 import com.example.stegnoapp.stegno.CryptoTask.Decoding;
 import com.example.stegnoapp.stegno.CryptoTask.Encoding;
@@ -32,7 +32,7 @@ import java.io.IOException;
 public class Decrypt extends Fragment implements CryptCallback {
 
     private DecryptModel slideshowViewModel;
-    private FragmentSlideshowBinding binding;
+    private DecryptBinding binding;
     private static final String Tag = "Decoding fragment";
     ImageView imageView;
     TextView textView;
@@ -55,7 +55,7 @@ public class Decrypt extends Fragment implements CryptCallback {
         slideshowViewModel =
                 new ViewModelProvider(this).get(DecryptModel.class);
 
-    binding = FragmentSlideshowBinding.inflate(inflater, container, false);
+    binding = DecryptBinding.inflate(inflater, container, false);
     View root = binding.getRoot();
 
     textView = binding.textGallery;
