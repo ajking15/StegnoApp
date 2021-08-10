@@ -230,15 +230,10 @@ public class Utils {
      * @parameter : String
      */
     public static boolean stringEmpty(String str) {
-        boolean result = true;
-
-        if (str == null) ;
-        else {
-            str = str.trim();
-            if (str.length() > 0 && !str.equals("undefined"))
-                result = false;
-        }
-
-        return result;
+        if (str != null && str.length() > 0 && !str.equals(""))
+            return false;
+        else
+            return true;
     }
 }
+

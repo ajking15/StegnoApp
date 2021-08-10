@@ -97,7 +97,8 @@ public class Decrypt extends Fragment implements CryptCallback {
         if(filepath != null){
             //New Image Stegnography Obj
             imageStegno = new ImageStegno(key.getText().toString(), encodedImage);
-            //Encoding Text to image
+            Log.d(Tag, "UI Key: " + key.getText());
+            //Decode Text to image
             decoding = new Decoding(this.getActivity(), Decrypt.this);
             decoding.execute(imageStegno);
         }
@@ -135,6 +136,7 @@ public class Decrypt extends Fragment implements CryptCallback {
             if (!result.getDecrypted()) {
                 textView.setText(result.getKey().toString());
             } else {
+                Log.d(Tag,"Message: " + result.getMessage().toString());
                 if (!result.getWrongKey()) {
                     textView.setText("Decoded Message: " + result.getMessage().toString());
                 } else {

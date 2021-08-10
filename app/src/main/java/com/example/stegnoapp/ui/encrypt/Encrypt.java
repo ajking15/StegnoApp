@@ -124,9 +124,9 @@ public class Encrypt extends Fragment implements CryptCallback {
     private void imageEncrypt(){
         if(filepath != null && message.getText() != null){
             //New Image Stegnography Obj
-            imageStegno = new ImageStegno(message.getText().toString(), key.getText().toString(), originalImage);
+            imageStegno = new ImageStegno(key.getText().toString(),message.getText().toString(), originalImage);
             //Encoding Text to image
-            encoding = new Encoding(Encrypt.this, Encrypt.this);
+            encoding = new Encoding(this.getActivity(), Encrypt.this);
             encoding.execute(imageStegno);
         }
     }
@@ -154,12 +154,7 @@ public class Encrypt extends Fragment implements CryptCallback {
             image.compress(Bitmap.CompressFormat.PNG, 100, outStream);
             outStream.flush();
             outStream.close(); // CLosing the stream
-            textView.post(new Runnable() {
-                @Override
-                public void run() {
-                    save.animate();
-                }
-            });
+            textView.setText("Image Saved");
 
         } catch(FileNotFoundException excep){
             excep.printStackTrace();
@@ -200,8 +195,8 @@ public class Encrypt extends Fragment implements CryptCallback {
             encodedImage = result.getEncodedImage();
             textView.setText("Image Encoded!");
             imgSelect.setImageBitmap(encodedImage);
-            Log.d(Tag, "Message: " + message.getText().toString());
-            Log.d(Tag, "Key: " + key.getText().toString());
+            Log.d(Tag, "Message: " + result.getEncryptedMessage().toString());
+            Log.d(Tag, "Key: " + result.getKey().toString());
         }
     }
 }

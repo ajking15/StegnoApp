@@ -2,9 +2,19 @@ package com.example.stegnoapp.stegno.Tools;
 
 import android.util.Log;
 
+import java.io.UnsupportedEncodingException;
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.security.SecureRandom;
 import java.util.Arrays;
+import java.util.Base64;
 
 import javax.crypto.Cipher;
+import javax.crypto.SecretKey;
+import javax.crypto.SecretKeyFactory;
+import javax.crypto.spec.IvParameterSpec;
+import javax.crypto.spec.PBEKeySpec;
 import javax.crypto.spec.SecretKeySpec;
 
 public class CryptAlgo {
@@ -14,27 +24,42 @@ public class CryptAlgo {
     @parameter : Message {String}, Secret key {String}
     @return : Encrypted Message {String}
      */
+    private static SecretKeySpec secretKey;
+    private static byte[] key;
+
+    public static void setKey(String myKey)
+    {
+        MessageDigest shaKey = null;
+        try {
+            key = myKey.getBytes("UTF-8");
+            shaKey = MessageDigest.getInstance("SHA-1");
+            key = shaKey.digest(key);
+            key = Arrays.copyOf(key, 16);
+            secretKey = new SecretKeySpec(key, "AES");
+        }
+        catch (NoSuchAlgorithmException e) {
+            Log.e("error", e.toString());
+        }
+        catch (UnsupportedEncodingException e) {
+            Log.e("error", e.toString());
+        }
+    }
     public static String encryptMessage(String message, String secret_key) throws Exception {
-
-        // Creating key and cipher
-        SecretKeySpec aesKey = new SecretKeySpec(secret_key.getBytes(), "AES");
-        Cipher cipher;
-
-        //AES cipher
-        cipher = Cipher.getInstance("AES");
-
-        // encrypt the text
-        cipher.init(Cipher.ENCRYPT_MODE, aesKey);
-
-        byte[] encrypted;
-
-        encrypted = cipher.doFinal(message.getBytes());
-
-        Log.d("crypto", "Encrypted  in crypto (mine): " + Arrays.toString(encrypted) + "string: " + android.util.Base64.encodeToString(cipher.doFinal(message.getBytes()), 0));
-
-        Log.d("crypto", "Encrypted  in crypto (theirs): " + Arrays.toString(cipher.doFinal(message.getBytes())) + "string : " + new String(encrypted));
-
-        return android.util.Base64.encodeToString(cipher.doFinal(message.getBytes()), 0);
+        Log.d("Crypto", "cipher here: AES");
+        try
+        {
+            setKey(secret_key);
+            Log.d("crypto", "Encoding: Getting cipher instance");
+            Cipher cipher = Cipher.getInstance("AES/ECB/PKCS5Padding");
+            cipher.init(Cipher.ENCRYPT_MODE, secretKey);
+            Log.d("crypto", "Decoding the message");
+            return Base64.getEncoder().encodeToString(cipher.doFinal(message.getBytes("UTF-8")));
+        }
+        catch (Exception e)
+        {
+            Log.e("error", "Error while encrypting: " + e.toString());
+        }
+        return null;
     }
 
     //Decryption Method
@@ -43,24 +68,21 @@ public class CryptAlgo {
     @return : Message {String}
      */
     public static String decryptMessage(String encrypted_message, String secret_key) throws Exception {
-
-        Log.d("Decrypt", "message: + " + encrypted_message);
-        // Creating key and cipher
-        SecretKeySpec aesKey = new SecretKeySpec(secret_key.getBytes(), "AES");
-        Cipher cipher;
-
-        //AES cipher
-        cipher = Cipher.getInstance("AES");
-
-        // decrypting the text
-        cipher.init(Cipher.DECRYPT_MODE, aesKey);
-        String decrypted;
-        byte[] decoded;
-        decoded = android.util.Base64.decode(encrypted_message.getBytes(), 0);
-        decrypted = new String(cipher.doFinal(decoded));
-
-        //returning decrypted text
-        return decrypted;
+        System.out.println("Key: " + secret_key);
+        try
+        {
+            setKey(secret_key);
+            Log.d("crypto", "Decoding: Getting cipher instance");
+            Cipher cipher = Cipher.getInstance("AES/ECB/PKCS5PADDING");
+            cipher.init(Cipher.DECRYPT_MODE, secretKey);
+            Log.d("crypto", "Decoding the message");
+            return new String(cipher.doFinal(Base64.getDecoder().decode(encrypted_message)));
+        }
+        catch (Exception e)
+        {
+            Log.e("Error","Error while decrypting: " + e.toString());
+        }
+        return null;
     }
 
 }

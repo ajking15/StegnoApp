@@ -1,7 +1,6 @@
 package com.example.stegnoapp.stegno.CryptoTask;
 
 import android.app.Activity;
-import android.app.ProgressDialog;
 import android.graphics.Bitmap;
 import android.os.AsyncTask;
 import android.util.Log;
@@ -24,20 +23,20 @@ public class Decoding extends AsyncTask<ImageStegno, Void, ImageStegno> {
     private final ImageStegno result;
     //Callback interface for AsyncTask
     private final CryptCallback textDecodingCallback;
-    private ProgressDialog progressDialog;
+    //private ProgressDialog progressDialog;
 
     public Decoding(Activity activity, CryptCallback textDecodingCallback) {
         super();
-        this.progressDialog = new ProgressDialog(activity);
+        //this.progressDialog = new ProgressDialog(activity);
         this.textDecodingCallback = textDecodingCallback;
         //making result object
         this.result = new ImageStegno();
     }
 
     //setting progress dialog if wanted
-    public void setProgressDialog(ProgressDialog progressDialog) {
-        this.progressDialog = progressDialog;
-    }
+//    public void setProgressDialog(ProgressDialog progressDialog) {
+//        this.progressDialog = progressDialog;
+//    }
 
     //pre execution of method
     @Override
@@ -45,14 +44,14 @@ public class Decoding extends AsyncTask<ImageStegno, Void, ImageStegno> {
         super.onPreExecute();
 
         //setting parameters of progress dialog
-        if (progressDialog != null) {
-            progressDialog.setMessage("Loading, Please Wait...");
-            progressDialog.setTitle("Decoding Message");
-            progressDialog.setIndeterminate(true);
-            progressDialog.setCancelable(false);
-            progressDialog.show();
-
-        }
+//        if (progressDialog != null) {
+//            progressDialog.setMessage("Loading, Please Wait...");
+//            progressDialog.setTitle("Decoding Message");
+//            progressDialog.setIndeterminate(true);
+//            progressDialog.setCancelable(false);
+//            progressDialog.show();
+//
+//        }
     }
 
     @Override
@@ -60,8 +59,8 @@ public class Decoding extends AsyncTask<ImageStegno, Void, ImageStegno> {
         super.onPostExecute(ImageStegno);
 
         //dismiss progress dialog
-        if (progressDialog != null)
-            progressDialog.dismiss();
+//        if (progressDialog != null)
+//            progressDialog.dismiss();
 
         //sending result to callback
         textDecodingCallback.onEncoded(result);

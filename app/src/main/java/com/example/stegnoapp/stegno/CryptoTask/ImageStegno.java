@@ -6,6 +6,10 @@ import android.util.Log;
 import com.example.stegnoapp.stegno.Tools.CryptAlgo;
 import com.example.stegnoapp.stegno.Tools.Utils;
 
+import java.security.SecureRandom;
+
+import javax.crypto.spec.IvParameterSpec;
+
 // The class for text stegno
 public class ImageStegno {
     // Log tagging
@@ -44,8 +48,10 @@ public class ImageStegno {
 
         this.encryptedMessage = encryptMessage(message, key);
         this.encryptZip = message.getBytes();
-
-        this.wrongKey = true;
+        if(key == null || key.equals("")) {
+            this.wrongKey = true;
+        }
+        else{this.wrongKey = false;}
         this.encrypted = false;
         this.decrypted = false;
 
@@ -61,7 +67,6 @@ public class ImageStegno {
         this.decrypted = false;
 
         this.message = "";
-        this.key = "";
         this.encryptedMessage = "";
         this.encodedImage = Bitmap.createBitmap(500,500, Bitmap.Config.ARGB_8888);
         this.encryptZip = new byte[0];
@@ -74,12 +79,14 @@ public class ImageStegno {
         if(message != null){
             if(!Utils.stringEmpty(key)){
                 try {
+                    Log.d(Tag, "Going to crypt...");
                     encryptMessage = CryptAlgo.encryptMessage(message, key);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
             }
             else{
+                Log.d(Tag, "Empty Key provided");
                 encryptMessage = message;
             }
         }
@@ -89,6 +96,7 @@ public class ImageStegno {
 
     public static String decryptMessage(String message, String key){
         Log.d(Tag, "Decrypting Message: " + message);
+        Log.d(Tag,"Decrypting Key: " + key);
         String decryptMessage = "";
         if(message != null){
             if(!Utils.stringEmpty(key)){
@@ -99,6 +107,7 @@ public class ImageStegno {
                 }
             }
             else{
+                Log.d(Tag, "Empty Key provided for decode");
                 decryptMessage = message;
             }
         }
@@ -120,6 +129,11 @@ public class ImageStegno {
         Log.d(Tag, "Secret Key Length : " + res.toString().getBytes().length);
 
         return res.toString();
+    }
+    public static IvParameterSpec generateIv() {
+        byte[] iv = new byte[16];
+        new SecureRandom().nextBytes(iv);
+        return new IvParameterSpec(iv);
     }
     // Getters & Setters
     public Boolean getDecrypted() {
