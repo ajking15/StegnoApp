@@ -12,13 +12,13 @@ import com.example.stegnoapp.stegno.Tools.Utils;
 import java.util.List;
 
 /**
- * In this class all those method in EncodeDecode class are used to decode secret message in image.
+ * In this class all those method in EnDeCode class are used to decode secret message in image.
  * All the tasks will run in background.
  */
 public class Decoding extends AsyncTask<ImageStegno, Void, ImageStegno> {
 
     //Tag for Log
-    private final static String TAG = Decoding.class.getName();
+    private final static String Tag = Decoding.class.getName();
 
     private final ImageStegno result;
     //Callback interface for AsyncTask
@@ -63,7 +63,7 @@ public class Decoding extends AsyncTask<ImageStegno, Void, ImageStegno> {
             //decoding encrypted zipped message
             String decoded_message = EnDeCode.decodeMessage(srcEncodedList);
 
-            Log.d(TAG, "Decoded_Message : " + decoded_message);
+            Log.d(Tag, "Decoded_Message : " + decoded_message);
 
             //text decoded = true
             if (!Utils.stringEmpty(decoded_message)) {
@@ -72,7 +72,7 @@ public class Decoding extends AsyncTask<ImageStegno, Void, ImageStegno> {
 
             //decrypting the encoded message
             String decrypted_message = ImageStegno.decryptMessage(decoded_message, ImageStegno.getKey());
-            Log.d(TAG, "Decrypted message : " + decrypted_message);
+            Log.d(Tag, "Decrypted message : " + decrypted_message);
 
             //If decrypted_message is null it means that the secret key is wrong otherwise secret key is right.
             if (!Utils.stringEmpty(decrypted_message)) {

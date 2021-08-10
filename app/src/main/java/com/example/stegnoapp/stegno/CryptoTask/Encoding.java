@@ -12,13 +12,13 @@ import com.example.stegnoapp.ui.encrypt.Encrypt;
 import java.util.List;
 
 /**
- * In this class all those method in EncodeDecode class are used to encode secret message in image.
+ * In this class all those method in EnDeCode class are used to encode secret message in image.
  * All the tasks will run in background.
  */
 public class Encoding extends AsyncTask<ImageStegno, Integer, ImageStegno> {
 
     //Tag for Log
-    private static final String TAG = Encoding.class.getName();
+    private static final String Tag = Encoding.class.getName();
 
     private final ImageStegno result;
     //Callback interface for AsyncTask
@@ -64,8 +64,8 @@ public class Encoding extends AsyncTask<ImageStegno, Integer, ImageStegno> {
             Bitmap bitmap = textStegnography.getImage();
 
             //getting height and width of original image
-            int originalHeight = bitmap.getHeight();
-            int originalWidth = bitmap.getWidth();
+            int orgHeight = bitmap.getHeight();
+            int orgWidth = bitmap.getWidth();
 
             //splitting bitmap
             List<Bitmap> src_list = Utils.splitImage(bitmap);
@@ -77,7 +77,7 @@ public class Encoding extends AsyncTask<ImageStegno, Integer, ImageStegno> {
                         public void setTotal(int tot) {
                             maximumProgress = tot;
                             // progressDialog.setMax(maximumProgress);
-                            Log.d(TAG, "Total Length: " + tot);
+                            Log.d(Tag, "Total Length: " + tot);
                         }
 
                         @Override
@@ -87,7 +87,7 @@ public class Encoding extends AsyncTask<ImageStegno, Integer, ImageStegno> {
 
                         @Override
                         public void finished() {
-                            Log.d(TAG, "Finished Encoding!");
+                            Log.d(Tag, "Finished Encoding!");
                             //progressDialog.setIndeterminate(true);
                         }
                     });
@@ -100,13 +100,13 @@ public class Encoding extends AsyncTask<ImageStegno, Integer, ImageStegno> {
             System.gc();
 
             //merging the split encoded image
-            Bitmap srcEncoded = Utils.mergeImage(encoded_list, originalHeight, originalWidth);
+            Bitmap srcEncoded = Utils.mergeImage(encoded_list, orgHeight, orgWidth);
 
             //Setting encoded image to result
             result.setEncodedImage(srcEncoded);
             result.setEncrypted(true);
         }
-        Log.d(TAG, "Results: " + result.getKey());
+        Log.d(Tag, "Results: " + result.getKey());
         return result;
     }
 }
