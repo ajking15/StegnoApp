@@ -27,8 +27,8 @@
         android:id="@+id/selectButton"
         android:layout_width="wrap_content"
         android:layout_height="48dp"
-        android:layout_marginStart="28dp"
-        android:layout_marginBottom="112dp"
+        android:layout_marginStart="60dp"
+        android:layout_marginBottom="120dp"
         android:text="Select Image"
         app:layout_constraintBottom_toTopOf="@+id/text_gallery"
         app:layout_constraintStart_toStartOf="parent" />
@@ -52,8 +52,8 @@
         android:id="@+id/decryptButton"
         android:layout_width="110dp"
         android:layout_height="48dp"
-        android:layout_marginEnd="68dp"
-        android:layout_marginBottom="112dp"
+        android:layout_marginEnd="56dp"
+        android:layout_marginBottom="120dp"
         android:text="Decrypt"
         app:layout_constraintBottom_toTopOf="@+id/text_gallery"
         app:layout_constraintEnd_toEndOf="parent" />

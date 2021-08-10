@@ -33,35 +33,15 @@ public class Decoding extends AsyncTask<ImageStegno, Void, ImageStegno> {
         this.result = new ImageStegno();
     }
 
-    //setting progress dialog if wanted
-//    public void setProgressDialog(ProgressDialog progressDialog) {
-//        this.progressDialog = progressDialog;
-//    }
-
     //pre execution of method
     @Override
     protected void onPreExecute() {
         super.onPreExecute();
-
-        //setting parameters of progress dialog
-//        if (progressDialog != null) {
-//            progressDialog.setMessage("Loading, Please Wait...");
-//            progressDialog.setTitle("Decoding Message");
-//            progressDialog.setIndeterminate(true);
-//            progressDialog.setCancelable(false);
-//            progressDialog.show();
-//
-//        }
     }
 
     @Override
     protected void onPostExecute(ImageStegno ImageStegno) {
         super.onPostExecute(ImageStegno);
-
-        //dismiss progress dialog
-//        if (progressDialog != null)
-//            progressDialog.dismiss();
-
         //sending result to callback
         textDecodingCallback.onEncoded(result);
     }
@@ -76,10 +56,6 @@ public class Decoding extends AsyncTask<ImageStegno, Void, ImageStegno> {
 
             //getting bitmap image from file
             Bitmap bitmap = ImageStegno.getImage();
-
-            //return null if bitmap is null
-//            if (bitmap == null)
-//                return null;
 
             //splitting images
             List<Bitmap> srcEncodedList = Utils.splitImage(bitmap);

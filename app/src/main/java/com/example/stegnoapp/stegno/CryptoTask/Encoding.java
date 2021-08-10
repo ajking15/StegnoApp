@@ -38,38 +38,17 @@ public class Encoding extends AsyncTask<ImageStegno, Integer, ImageStegno> {
     @Override
     protected void onPreExecute() {
         super.onPreExecute();
-
-        //setting parameters of progress dialog
-//        if (progressDialog != null) {
-//            progressDialog.setMessage("Loading, Please Wait...");
-//            progressDialog.setTitle("Encoding Message");
-//            progressDialog.setIndeterminate(false);
-//            progressDialog.setCancelable(false);
-//            progressDialog.show();
-//        }
     }
 
     @Override
     protected void onPostExecute(ImageStegno textStegnography) {
         super.onPostExecute(textStegnography);
-
-        //dismiss progress dialog
-//        if (progressDialog != null) {
-//            progressDialog.dismiss();
-//        }
-
-        //Sending result to callback interface
         callbackInterface.onEncoded(result);
     }
 
     @Override
     protected void onProgressUpdate(Integer... values) {
         super.onProgressUpdate(values);
-
-        //Updating progress dialog
-//        if (progressDialog != null) {
-//            progressDialog.incrementProgressBy(values[0]);
-//        }
     }
 
     @Override

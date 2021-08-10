@@ -46,20 +46,22 @@ public class CryptAlgo {
     }
     public static String encryptMessage(String message, String secret_key) throws Exception {
         Log.d("Crypto", "cipher here: AES");
+        String encrypt = null;
         try
         {
             setKey(secret_key);
             Log.d("crypto", "Encoding: Getting cipher instance");
             Cipher cipher = Cipher.getInstance("AES/ECB/PKCS5Padding");
             cipher.init(Cipher.ENCRYPT_MODE, secretKey);
-            Log.d("crypto", "Decoding the message");
-            return Base64.getEncoder().encodeToString(cipher.doFinal(message.getBytes("UTF-8")));
+            Log.d("crypto", "Encoding the message");
+            encrypt = Base64.getEncoder().encodeToString(cipher.doFinal(message.getBytes("UTF-8")));
         }
         catch (Exception e)
         {
             Log.e("error", "Error while encrypting: " + e.toString());
         }
-        return null;
+        Log.d("crypt", "Encrypted Message: " + encrypt);
+        return encrypt;
     }
 
     //Decryption Method
@@ -68,7 +70,6 @@ public class CryptAlgo {
     @return : Message {String}
      */
     public static String decryptMessage(String encrypted_message, String secret_key) throws Exception {
-        System.out.println("Key: " + secret_key);
         try
         {
             setKey(secret_key);

@@ -14,8 +14,6 @@ This class has methods used to compress and decompress encrypted message.
 
 public class Compress {
 
-    final static String TAG = Compress.class.getName();
-
     /*
     @parameter : Encrypted message {String}
     @return : Compressed byte array
